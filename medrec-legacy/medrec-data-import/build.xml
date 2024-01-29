@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    @author Copyright (c) 2007,2013, Oracle and/or its affiliates. All rights reserved.
+-->
+<project name="medrec-data-import" default="install" basedir=".">
+
+    <import file="../module-build-commons.xml" />
+
+    <property name="log.dir" value="${target.dir}/logs" />
+
+    <target name="run">
+        <mkdir dir="${log.dir}" />
+
+        <taskdef name="derby" classname="weblogic.ant.taskdefs.derby.Derby">
+            <classpath>
+                <pathelement path="${wls.home}/server/lib/weblogic.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbynet.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbytools.jar" />
+            </classpath>
+        </taskdef>
+
+        <echo message="starting derby..." />
+        <derby operation="start" systemhome="${wls.home}/common/derby/demo/databases" port="19082">
+            <classpath>
+                <pathelement path="${wls.home}/server/lib/weblogic.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbynet.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbytools.jar" />
+            </classpath>
+        </derby>
+
+        <sleep seconds="5" />
+        <antcall target="data.importer.invoke" />
+
+        <echo message="stopping derby..." />
+        <derby operation="shutdown" systemhome="${wls.home}/common/derby/demo/databases" port="19082">
+            <classpath>
+                <pathelement path="${wls.home}/server/lib/weblogic.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbynet.jar" />
+                <pathelement path="${wls.home}/common/derby/lib/derbytools.jar" />
+            </classpath>
+        </derby>
+    </target>
+
+
+    <target name="data.importer.invoke">
+        <echo message="wls.home=${wls.home}" />
+        <echo message="classes.dir=${classes.dir}" />
+        <echo message="src.dir=${src.dir}" />
+        <mkdir dir="${classes.dir}" />
+        <javac destdir="${classes.dir}" compiler="${build.compiler}" source="${build.source.version}" failonerror="true" fork="true">
+            <src path="${src.dir}" />
+            <include name="**/DataImporter.java" />
+            <classpath>
+                <path refid="common.path" />
+            </classpath>
+        </javac>
+        <mkdir dir="${classes.dir}/META-INF" />
+        <copy todir="${classes.dir}/META-INF">
+            <fileset dir="${resources.dir}/META-INF" />
+        </copy>
+
+        <java classname="com.oracle.medrec.util.DataImporter" fork="true" failonerror="true">
+            <classpath>
+                <pathelement path="${wls.home}/server/lib/weblogic.jar" />
+                <pathelement path="${classes.dir}" />
+                <pathelement path="${wls.home}/common/derby/lib/derbyclient.jar" />
+                <path refid="common.path" />
+            </classpath>
+        </java>
+    </target>
+</project>

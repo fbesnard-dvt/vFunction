@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author Copyright (c) 2007,2013, Oracle and/or its affiliates. All rights 
+	reserved. -->
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+	id="Application_ID" version="5">
+	<description>Medical Records Patient/Admin Application</description>
+	<display-name>Medical Records Patient/Admin Application</display-name>
+	<module>
+		<ejb>common.jar</ejb>
+	</module>
+	<module>
+		<ejb>physician-domain.jar</ejb>
+	</module>
+	<module>
+		<web>
+			<web-uri>physician-web.war</web-uri>
+			<context-root>medrec/physician</context-root>
+		</web>
+	</module>
+</application>

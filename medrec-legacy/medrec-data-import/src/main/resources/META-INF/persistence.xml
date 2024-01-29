@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+  <persistence-unit name="MedRecDataImport" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.oracle.medrec.model.Address</class>
+    <class>com.oracle.medrec.model.Administrator</class>
+    <class>com.oracle.medrec.model.BaseEntity</class>
+    <class>com.oracle.medrec.model.PersonName</class>
+    <class>com.oracle.medrec.model.Patient</class>
+    <class>com.oracle.medrec.model.Physician</class>
+    <class>com.oracle.medrec.model.Prescription</class>
+    <class>com.oracle.medrec.model.Record</class>
+    <class>com.oracle.medrec.model.RegularUser</class>
+    <class>com.oracle.medrec.model.User</class>
+    <class>com.oracle.medrec.model.VersionedEntity</class>
+    <class>com.oracle.medrec.model.VitalSigns</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:19082/medrec;create=true"/>
+      <property name="javax.persistence.jdbc.password" value="medrec"/>
+      <property name="javax.persistence.jdbc.user" value="medrec"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>

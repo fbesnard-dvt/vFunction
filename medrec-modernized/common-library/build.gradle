@@ -1,0 +1,40 @@
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'com.oracle.medrec'
+version = '1.0-SNAPSHOT'
+description = 'common-library'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    // Auto generated dependencies start (do not remove this line comment)
+    // Beginning of hard-coded dependencies added by vFunction (do not remove this line comment)
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+    // End of hard-coded dependencies added by vFunction (do not remove this line comment)
+    implementation 'common:common:UNKNOWN'
+    // Auto generated dependencies end (do not remove this line comment)
+
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

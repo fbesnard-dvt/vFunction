@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>/medrec</param-value>
+    </context-param>
+    <listener>
+        <listener-class>com.oracle.medrec.util.OpenBrowserServletContextListener</listener-class>
+    </listener>
+</web-app>

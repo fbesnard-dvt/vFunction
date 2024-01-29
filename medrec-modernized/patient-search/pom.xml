@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- artifact coordinates-->
+	<groupId>com.oracle.medrec</groupId>
+	<artifactId>PatientSearch</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	
+	<!-- properties copied from the parent pom.xml file referenced by the original medrec code -->
+	<!-- please review the below and ensure it is set correctly to your system -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<wls.url>t3://10.0.0.3:7001</wls.url>
+		<wls.user>weblogic</wls.user>
+		<wls.password>welcome1</wls.password>
+		<wls.adminServer>AdminServer</wls.adminServer>
+	</properties>
+
+	<build>
+	<defaultGoal>install</defaultGoal>
+	<finalName>${project.name}</finalName>
+	<pluginManagement>
+		<!-- plugins copied from the parent pom.xml file referenced by the original medrec code -->
+		<plugins>
+			<plugin>
+				<!-- This is the configuration for the weblogic-maven-plugin -->
+				<groupId>com.oracle.weblogic</groupId>
+				<artifactId>weblogic-maven-plugin</artifactId>
+				<version>12.1.3-0-0</version>
+				<configuration>
+					<adminurl>${wls.url}</adminurl>
+					<user>${wls.user}</user>
+					<password>${wls.password}</password>
+					<!--The location of the file or directory to be deployed -->
+					<source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
+					<!--The target servers where the application is deployed. -->
+					<targets>${wls.adminServer}</targets>
+					<verbose>true</verbose>
+					<name>${project.build.finalName}</name>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<ejbVersion>3.1</ejbVersion>
+					<jarName>${project.name}</jarName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<warName>${project.name}</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.15</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<finalName>${project.name}</finalName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		</pluginManagement>
+	</build>
+	<dependencies>
+		<!-- dependencies added by vFunction -->
+		<dependency>
+			<groupId>com.oracle.medrec</groupId>
+			<artifactId>commonlib</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.weblogic.sample.medrec-javaee</groupId>
+			<artifactId>common</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.19.4</version>
+		</dependency>
+		<!-- below dependencies were copied from original parent pom.xml -->
+		<dependency>
+			<groupId>com.oracle.weblogic</groupId>
+			<artifactId>weblogic-server-pom</artifactId>
+			<version>12.1.3-0-0</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>2.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

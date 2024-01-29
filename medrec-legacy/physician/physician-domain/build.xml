@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    @author Copyright (c) 2007, @COPYRIGHT_CURRENTYEAR, Oracle and/or its affiliates. All rights reserved.
+-->
+<project name="physician-domain" default="install" basedir=".">
+
+    <import file="../../module-build-commons.xml" />
+
+    <!-- TODO various hard-coded stuff -->
+
+    <target name="pre.build">
+        <taskdef name="clientgen"
+                 classname="weblogic.wsee.tools.anttasks.ClientGenTask" />
+        <mkdir dir="${generated.classes.dir}" />
+        <clientgen type="JAXWS"
+                   fork="true"
+                   wsdl="${module.home}/medrec/medrec-jaxws-facade-broker/target/JaxWsPatientFacadeBroker/PatientFacadeService.wsdl"
+                   destDir="${generated.src.dir}"
+                   packageName="com.oracle.physician.service.delegate.stub.jaxws" />
+
+        <move todir="${generated.classes.dir}">
+            <fileset dir="${generated.src.dir}" excludes="**/*.java" />
+        </move>
+    </target>
+
+</project>

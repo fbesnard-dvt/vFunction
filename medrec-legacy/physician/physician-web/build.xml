@@ -1,0 +1,20 @@
+<!--
+    @author Copyright (c) 2007,2013, Oracle and/or its affiliates. All rights reserved.
+-->
+<project name="physician-web" default="install" basedir=".">
+
+    <property name="archive.type" value="war"/>
+
+    <import file="../../module-build-commons.xml"/>
+
+    <!--<target name="post.build">-->
+        <!--<mkdir dir="${target.dir}/tmp"/>-->
+        <!--<native2ascii encoding="GBK" src="${resources.dir}" dest="${target.dir}/tmp"-->
+                      <!--includes="**/LocalizationResources_zh_CN*"/>-->
+        <!--<copy todir="${classes.dir}" overwrite="true">-->
+            <!--<fileset dir="${target.dir}/tmp"/>-->
+        <!--</copy>-->
+        <!--<delete dir="${target.dir}/tmp"/>-->
+    <!--</target>-->
+
+</project>
